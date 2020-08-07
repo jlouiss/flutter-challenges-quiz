@@ -1,1 +1,89 @@
-void main() {}
+import 'package:flutter/material.dart';
+
+void main() => runApp(QuizApp());
+
+class QuizApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.grey.shade300,
+        body: SafeArea(
+            child: Padding(
+          child: QuizPage(),
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+        )),
+      ),
+    );
+  }
+}
+
+class QuizPage extends StatefulWidget {
+  @override
+  _QuizPageState createState() => _QuizPageState();
+}
+
+class _QuizPageState extends State<QuizPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Expanded(
+          flex: 5,
+          child: Padding(
+            child: Center(
+              child: Text(
+                'This is where the question text will go.',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            padding: EdgeInsets.all(15.0),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            child: FlatButton(
+              color: Colors.green,
+              child: Text(
+                'True',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                ),
+              ),
+              onPressed: () {
+                //The user picked true.
+              },
+              textColor: Colors.white,
+            ),
+            padding: EdgeInsets.all(15.0),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            child: FlatButton(
+              color: Colors.red,
+              child: Text(
+                'False',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () {
+                //The user picked false.
+              },
+            ),
+            padding: EdgeInsets.all(15.0),
+          ),
+        ),
+      ],
+    );
+  }
+}
