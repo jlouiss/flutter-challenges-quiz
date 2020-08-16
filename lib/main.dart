@@ -28,6 +28,20 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  static const Icon correctIcon = Icon(Icons.check, color: Colors.green);
+  static const Icon wrongIcon = Icon(Icons.close, color: Colors.red);
+
+  List<Icon> answerResults = [];
+
+  void checkAnswer(bool userAnswer) {
+    bool isAnswerCorrect = userAnswer == quizBrain.getQuestionAnswer();
+
+    setState(() {
+      answerResults.add(isAnswerCorrect ? correctIcon : wrongIcon);
+      quizBrain.nextQuestion();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,7 +76,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //The user picked true.
+                checkAnswer(true);
               },
               textColor: Colors.white,
             ),
@@ -81,11 +95,14 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //The user picked false.
+                checkAnswer(false);
               },
             ),
             padding: EdgeInsets.all(15.0),
           ),
+        ),
+        Row(
+          children: answerResults,
         ),
       ],
     );
