@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/constants.dart';
 import 'package:quiz/quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
+Alert alert = Alert();
 QuizBrain quizBrain = QuizBrain(defaultQuestions);
 
 void main() => runApp(QuizApp());
@@ -34,12 +36,35 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> answerResults = [];
 
   void checkAnswer(bool userAnswer) {
-    bool isAnswerCorrect = userAnswer == quizBrain.getQuestionAnswer();
+    if (quizBrain.isFinished()) {
+      Alert(
+        context: context,
+        title: 'Congratulations!',
+        desc: 'You reached the end of the quiz',
+        buttons: [
+          DialogButton(
+            child: Text(
+              "OK",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+      ).show();
+      setState(() {
+        quizBrain.reset();
+        answerResults = [];
+      });
+    } else {
+      bool isAnswerCorrect = userAnswer == quizBrain.getQuestionAnswer();
 
-    setState(() {
-      answerResults.add(isAnswerCorrect ? correctIcon : wrongIcon);
-      quizBrain.nextQuestion();
-    });
+      setState(() {
+        answerResults.add(isAnswerCorrect ? correctIcon : wrongIcon);
+        quizBrain.nextQuestion();
+      });
+    }
   }
 
   @override
