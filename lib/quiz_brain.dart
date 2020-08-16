@@ -4,7 +4,7 @@ class QuizBrain {
   int _currentQuestionIndex = 0;
   List<Question> _questions = [];
 
-  QuizBrain(questions) {
+  QuizBrain(List<Question> questions) {
     _questions = questions;
   }
 
