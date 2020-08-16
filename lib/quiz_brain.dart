@@ -8,10 +8,18 @@ class QuizBrain {
     _questions = questions;
   }
 
+  bool isFinished() {
+    return _currentQuestionIndex == _questions.length - 1;
+  }
+
   void nextQuestion() {
     if (_currentQuestionIndex < _questions.length - 1) {
       _currentQuestionIndex++;
     }
+  }
+
+  void reset() {
+    _currentQuestionIndex = 0;
   }
 
   String getQuestionText() {
