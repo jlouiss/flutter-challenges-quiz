@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/constants.dart';
+import 'package:quiz/quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain(defaultQuestions);
 
 void main() => runApp(QuizApp());
 
@@ -7,7 +11,7 @@ class QuizApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.grey.shade800,
         body: SafeArea(
             child: Padding(
           child: QuizPage(),
@@ -35,7 +39,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                quizBrain.getQuestionText(),
                 style: TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
